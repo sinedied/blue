@@ -24,14 +24,12 @@ jobs:
       #     run: cd /work/.blue/infra && ./blue up myapp ${GITHUB_REF##*/env-}
       #   env:
       #     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      - uses: actions/checkout@v3
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Prepare environment
-        run: |
-          ls -al
-          cd .blue/infra
-          ./blue.sh up myapp ${GITHUB_REF##*/env-}
+        run: cd .blue/infra && ./blue.sh up myapp ${GITHUB_REF##*/env-}
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -39,10 +37,9 @@ jobs:
     if: github.event_name == 'delete' && contains(github.ref, 'refs/heads/env-')
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Delete environment
-        run: |
-          cd .blue/infra
-          ./blue.sh down myapp ${GITHUB_REF##*/env-}
+        run: cd .blue/infra && ./blue.sh down myapp ${GITHUB_REF##*/env-}
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
