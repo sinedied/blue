@@ -10,6 +10,23 @@ jobs:
     if: github.event_name == 'push' && contains('refs/heads/env-', github.ref)
     runs-on: ubuntu-latest
     steps:
+      # - name: Build docker image
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     context: .devcontainer
+      #     push: false
+      #     tags: blue:latest
+      # - uses: addnab/docker-run-action@v3
+      #   with:
+      #     image: blue:latest
+      #     shell: bash
+      #     options: -v ${{ github.workspace }}:/work -e AZURE_CREDENTIALS=${AZURE_CREDENTIALS} -e GITHUB_REF=${GITHUB_REF}
+      #     run: cd /work/.blue/infra && ./blue up myapp ${GITHUB_REF##*/env-}
+      #   env:
+      #     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Prepare environment
         run: cd .blue/infra && ./blue up myapp ${GITHUB_REF##*/env-}
         env:
