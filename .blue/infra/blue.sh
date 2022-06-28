@@ -18,7 +18,9 @@ if [ -z "$projectName" ]; then
   echo "\nError: project name is required."
 elif [ "$1" == "up" ]; then
   echo "Preparing environment '${environmentName}' of project '${projectName}'..."
-  az deployment sub create --template-file _index.bicep \
+  az deployment sub create \
+    --template-file _index.bicep \
+    --location $location \
     --parameters projectName=$projectName \
         environmentName=$environmentName \
         location=$location \
