@@ -1,4 +1,14 @@
+# Outputs
+lib/
+
+# Node.js
 node_modules/
+coverage/
 *.log
+*.tgz
+
+# Misc
 .DS_Store
-TODO.md
+Thumbs.db
+.env
+TODO

@@ -1,0 +1,110 @@
+{
+  "name": "blue",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Delightful cloud developer experience",
+  "type": "module",
+  "exports": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "bin": {
+    "blue": "./bin/blue.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "build:clean": "npm run clean -s && npm run build -s",
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "test": "xo && npm run -s test:unit",
+    "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "npm run -s test:unit -- --watch",
+    "clean": "npx rimraf lib",
+    "release:check": "semantic-release --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sinedied/blue.git"
+  },
+  "homepage": "https://github.com/sinedied/blue",
+  "bugs": {
+    "url": "https://github.com/sinedied/blue/issues"
+  },
+  "keywords": [
+    "cli",
+    "cloud",
+    "developer",
+    "experience",
+    "dx",
+    "gitops",
+    "infrastructure",
+    "automation",
+    "tooling"
+  ],
+  "author": {
+    "name": "Yohan Lasorsa",
+    "url": "https://twitter.com/sinedied"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.6",
+    "mustache": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.3",
+    "@types/minimist": "^1.2.2",
+    "@types/node": "^18.0.0",
+    "jest": "^28.1.1",
+    "semantic-release": "^19.0.3",
+    "semantic-release-npm-github": "^3.0.0",
+    "ts-jest": "^28.0.5",
+    "typescript": "^4.7.4",
+    "xo": "^0.50.0"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7.0.0"
+  },
+  "release": {
+    "extends": "semantic-release-npm-github",
+    "branches": "main"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "bracketSpacing": true
+  },
+  "xo": {
+    "space": true,
+    "prettier": true,
+    "envs": [
+      "node",
+      "jest"
+    ],
+    "rules": {
+      "unicorn/prefer-node-protocol": "off",
+      "@typescript-eslint/no-implicit-any-catch": "off",
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-call": "off"
+    }
+  },
+  "jest": {
+    "preset": "ts-jest/presets/default-esm",
+    "globals": {
+      "ts-jest": {
+        "useESM": true
+      }
+    },
+    "collectCoverageFrom": [
+      "*.js",
+      "lib/**/*.js"
+    ],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "verbose": true
+  },
+  "files": [
+    "bin",
+    "lib",
+    "template"
+  ]
+}
