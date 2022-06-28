@@ -1,0 +1,15 @@
+// For format details, see https://aka.ms/devcontainer.json
+{
+	"name": "blue builder",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+
+	"customizations": {
+		"vscode": {
+			"extensions": ["orta.vscode-jest", "samverschueren.linter-xo", "ms-azuretools.vscode-docker"]
+		}
+	},
+
+	"remoteUser": "vscode"
+}
