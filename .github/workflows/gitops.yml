@@ -29,6 +29,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Prepare environment
         run: |
+          ls -al
           cd .blue/infra
           ./blue.sh up myapp ${GITHUB_REF##*/env-}
         env:
