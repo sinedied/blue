@@ -20,6 +20,7 @@ elif [ "$1" == "up" ]; then
   echo "Preparing environment '${environmentName}' of project '${projectName}'..."
   az deployment sub create \
     --template-file _index.bicep \
+    --name "deployment-${projectName}-${environmentName}-${location}" \
     --location $location \
     --parameters projectName=$projectName \
         environmentName=$environmentName \
