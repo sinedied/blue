@@ -1,0 +1,37 @@
+name: Publish Docker images
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: bluebuilder/azure
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,prefix=,enable=${{ github.ref_type != 'tag' }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: bluebuilder
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push to Docker Hub
+        uses: docker/build-push-action@v3
+        with:
+          context: .devcontainer
+          push: true
+          tags: bluebuilder/azure:latest
