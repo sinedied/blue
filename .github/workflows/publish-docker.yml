@@ -34,4 +34,5 @@ jobs:
         with:
           context: .devcontainer
           push: true
-          tags: bluebuilder/azure:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
