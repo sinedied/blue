@@ -1,13 +1,18 @@
 // For format details, see https://aka.ms/devcontainer.json
 {
-	"name": "blue builder",
+	"name": "Blue Builder",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
 
 	"customizations": {
 		"vscode": {
-			"extensions": ["orta.vscode-jest", "samverschueren.linter-xo", "ms-azuretools.vscode-docker"]
+			"extensions": [
+				"orta.vscode-jest",
+				"samverschueren.linter-xo",
+				"ms-azuretools.vscode-bicep",
+				"ms-azuretools.vscode-docker"
+			]
 		}
 	},
 
