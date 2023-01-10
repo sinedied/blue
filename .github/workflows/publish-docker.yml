@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [.devcontainer/Dockerfile]
+    paths: [.devcontainer/Dockerfile, .github/workflows/publish-docker.yml]
 
 jobs:
   publish:
