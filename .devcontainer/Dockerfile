@@ -3,7 +3,7 @@
 FROM mcr.microsoft.com/azure-functions/python:4-python3.9-core-tools
 
 # Install Node.js and Azure tools
-ARG NODE_VERSION="16"
+ARG NODE_VERSION="18"
 ENV NVM_DIR="/usr/local/share/nvm" \
     NVM_SYMLINK_CURRENT=true \
     PATH="${NVM_DIR}/current/bin:${PATH}"
