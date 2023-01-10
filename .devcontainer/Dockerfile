@@ -24,4 +24,4 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "npm install --cache /tmp/empty-cache -g <your-package-here>"
 # Fix errors in CI workflows
-RUN su vscode -c "git config --global --add safe.directory *"
+RUN su vscode -c "git config --global --add safe.directory '*'"
