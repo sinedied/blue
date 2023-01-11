@@ -18,7 +18,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: bluebuilder/azure
+          images: cloudhue/azure
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
@@ -27,7 +27,7 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: bluebuilder
+          username: cloudhue
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push to Docker Hub
@@ -37,3 +37,35 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+
+  # publish_azure:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Log in to container registry
+  #       uses: docker/login-action@v2
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{ github.actor }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+
+  #     - name: Generate Docker metadata
+  #       id: meta
+  #       uses: docker/metadata-action@v4
+  #       with:
+  #         images: ghcr.io/cloudhue/azure
+  #         tags: |
+  #           type=semver,pattern={{version}}
+  #           type=semver,pattern={{major}}.{{minor}}
+  #           type=sha,prefix=,enable=${{ github.ref_type != 'tag' }}
+      
+  #     - name: Build and push Quarkus Java image to registry
+  #       uses: docker/build-push-action@v3
+  #       with:
+  #         context: .devcontainer
+  #         push: true
+  #         tags: ${{ steps.meta.outputs.tags }}
+  #         labels: ${{ steps.meta.outputs.labels }}
